@@ -2,7 +2,15 @@
 
 namespace App\Http\Controllers;
 
+// load Request
 use Illuminate\Http\Request;
+use App\Http\Requests\TenagaKesehatanRequest;
+
+// load Model
+use App\Models\TenagaKesehatan;
+
+// load Plugin
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TenagaKesehatanController extends Controller
 {
@@ -32,9 +40,28 @@ class TenagaKesehatanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TenagaKesehatanRequest $request)
     {
-        //
+        $Query = new TenagaKesehatan();
+
+        $Query->nama = $request->nama;
+        $Query->kelas = $request->kelas;
+        if($request->profesi == 'T'){
+            if(!$request->profesi_sendiri){
+                return redirect()->back()->withErrors(['Input Profesi Jawaban Anda harus diisi']);
+            }
+            $request->profesi = $request->profesi_sendiri;
+        }
+        $Query->profesi = $request->profesi;
+        $Query->ket_profesi = $request->ket_profesi;
+        $Query->kota = $request->kota;
+        $Query->provinsi = $request->provinsi;
+        $Query->instansi = $request->instansi;
+        $Query->save();
+
+        Alert::success('Berhasil', 'Data anda berhasil disimpan')->persistent(true)->autoClose(3000);
+        return redirect()->route('tenaga_kesehatan.finish');
+
     }
 
     /**

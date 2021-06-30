@@ -2,7 +2,15 @@
 
 namespace App\Http\Controllers;
 
+// load Request
 use Illuminate\Http\Request;
+use App\Http\Requests\PasienCovidRequest;
+
+// load Model
+use App\Models\PasienCovid;
+
+// load Plugin
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PasienCovidController extends Controller
 {
@@ -32,10 +40,62 @@ class PasienCovidController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PasienCovidRequest $request)
     {
-        //
-    }
+        $Query = new PasienCovid();
+
+        $Query->nama = $request->nama;
+        $Query->kelas = $request->kelas;
+        $Query->jenkel = $request->jenkel;
+        $Query->goldar = $request->goldar;
+        $Query->rhesus = $request->rhesus;
+        $Query->kota = $request->kota;
+
+        if($request->kondisi == 'T'){
+            if(!$request->kondisi_sendiri){
+                return redirect()->back()->withErrors(['Input Kondisi Jawaban Anda harus diisi']);
+            }
+            $request->kondisi = $request->kondisi_sendiri;
+        }
+
+        $objSupport = (object)($request->support);
+        $countArr = count($request->support) - 1;
+        $dataSupport = $request->support;
+        
+        if(end($objSupport) == 'T'){
+            if(!$request->support_sendiri){
+                return redirect()->back()->withErrors(['Input Support Jawaban Anda harus diisi']);
+            }
+            // $objSupport->append($request->support_sendiri);
+            $arrSupport = (array)$objSupport;
+            $replacement = array($countArr => $request->support_sendiri);
+            $dataSupport = array_replace($arrSupport, $replacement);
+            
+        }
+        
+        if($countArr == 0){
+            $finSupport = $dataSupport[0];
+        }
+        if($countArr == 1){
+            $finSupport = $dataSupport[0].', '.$dataSupport[1];
+        }
+        if($countArr == 2){
+            $finSupport = $dataSupport[0].', '.$dataSupport[1].', '.$dataSupport[2];
+        }
+        if($countArr == 3){
+            $finSupport = $dataSupport[0].', '.$dataSupport[1].', '.$dataSupport[2];
+        }
+        if($countArr == 4){
+            $finSupport = $dataSupport[0].', '.$dataSupport[1].', '.$dataSupport[2].', '.$dataSupport[3].', '.$dataSupport[4];
+        }
+
+        $Query->kondisi = $request->kondisi;
+        $Query->support = $finSupport;
+        $Query->save();
+
+        Alert::success('Berhasil', 'Data anda berhasil disimpan')->persistent(true)->autoClose(3000);
+        return redirect()->route('pasien_covid.finish');
+    }   
 
     /**
      * Display the specified resource.

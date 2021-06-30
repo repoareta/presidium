@@ -26,7 +26,7 @@
 									<!--begin::Header Nav-->
 									<ul class="menu-nav">
 										<li class="menu-item">
-											<a href="{{ route('login') }}" class="btn btn-success">
+											<a href="{{ route('admin.login') }}" class="btn btn-success">
 												Login
 											</a>
 										</li>

@@ -2,7 +2,16 @@
 
 namespace App\Http\Controllers;
 
+// load Request
 use Illuminate\Http\Request;
+use App\Http\Requests\PenyintasCovidRequest;
+
+// load Model
+use App\Models\PenyintasCovid;
+
+// load Plugin
+use RealRashid\SweetAlert\Facades\Alert;
+use Carbon\Carbon;
 
 class PenyintasCovidController extends Controller
 {
@@ -32,9 +41,22 @@ class PenyintasCovidController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PenyintasCovidRequest $request)
     {
-        //
+        $Query = New PenyintasCovid();
+
+        $Query->nama = $request->nama;
+        $Query->kelas = $request->kelas;
+        $Query->jenkel = $request->jenkel;
+        $Query->goldar = $request->goldar;
+        $Query->rhesus = $request->rhesus;
+        $Query->sembuh = Carbon::parse($request->sembuh)->format('Y-m-d');
+        $Query->kota = $request->kota;
+        $Query->donor_plasma = $request->donor_plasma == 'T' ? true : false ;
+        $Query->save();
+
+        Alert::success('Berhasil', 'Data anda berhasil disimpan')->persistent(true)->autoClose(3000);
+        return redirect()->route('penyintas_covid.finish');
     }
 
     /**

@@ -1,9 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// User
 use App\Http\Controllers\PasienCovidController;
 use App\Http\Controllers\PenyintasCovidController;
 use App\Http\Controllers\TenagaKesehatanController;
+// Admin
+use App\Http\Controllers\Admin\PasienCovidController as AdminPasienCovidController;
+use App\Http\Controllers\Admin\PenyintasCovidController as AdminPenyintasCovidController;
+use App\Http\Controllers\Admin\TenagaKesehatanController as AdminTenagaKesehatanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,16 +52,30 @@ Route::prefix('pasien-covid')->name('pasien_covid.')->group(function () {
 });
 
 // Admin
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->name('admin.')->group(function () {
 
     Auth::routes(['register' => false, 'reset' => false]);
     Route::middleware('auth')->group(function () {
-    
-        
+            
         // Dashboard
         Route::get('/', function () {
             return view('welcome');
         })->name('dashboard');
+
+        // Report
+        Route::prefix('report')->name('report.')->group(function () {
+            
+            // Pasien Covid
+            Route::get('/pasien-covid', [AdminPasienCovidController::class, 'index'])->name('pasien_covid');
+            Route::get('/pasien-covid/export-excel', [AdminPasienCovidController::class, 'exportExcel'])->name('pasien_covid.excel');
+            // Penyintas Covid
+            Route::get('/penyintas-covid', [AdminPenyintasCovidController::class, 'index'])->name('penyintas_covid');
+            Route::get('/penyintas-covid/export-excel', [AdminPenyintasCovidController::class, 'exportExcel'])->name('penyintas_covid.excel');
+            // Tenaga Kesehatan
+            Route::get('/tenaga-kesehatan', [AdminTenagaKesehatanController::class, 'index'])->name('tenaga_kesehatan');
+            Route::get('/tenaga-kesehatan/export-excel', [AdminTenagaKesehatanController::class, 'exportExcel'])->name('tenaga_kesehatan.excel');
+
+        });
 
     });
 

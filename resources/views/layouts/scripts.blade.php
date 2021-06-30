@@ -70,7 +70,7 @@
 <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
 <script src="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
 <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
-
+@include('sweetalert::alert')
 <!--end::Global Theme Bundle-->
 
 <!--begin::Page Vendors(used by this page)-->
@@ -80,6 +80,7 @@
 
 <!--begin::Page Scripts(used by this page)-->
 <script src="{{ asset('assets/js/pages/widgets.js') }}"></script>
+<script src="{{ asset('assets/js/pages/crud/forms/widgets/bootstrap-datepicker.id.min.js') }}"></script>
 <script>
     $(document).ready(function(){
         $('#yearFooter').html(new Date().getFullYear());

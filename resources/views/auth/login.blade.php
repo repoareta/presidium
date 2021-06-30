@@ -7,7 +7,7 @@
         <h3>Sign In To Admin</h3>
         <div class="text-muted font-weight-bold">Enter your details to login to your account:</div>
     </div>
-    <form class="form" action="{{ route('login') }}" method="POST">
+    <form class="form" action="{{ route('admin.login') }}" method="POST">
         @csrf
         <div class="form-group mb-5">
             <input class="form-control h-auto form-control-solid py-4 px-8 @error('email') is-invalid @enderror" type="text" placeholder="Email" name="email" value="{{ old('email') }}" autocomplete="email" autofocus />

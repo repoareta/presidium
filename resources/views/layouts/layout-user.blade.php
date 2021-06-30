@@ -58,9 +58,9 @@
 		<!--[html-partial:include:{"file":"partials/_extras/scrolltop.html"}]/-->
 		@include('layouts.partials-user._extras.scrolltop')
 		
-		<!--begin::Scripts-->
-		@include('layouts.scripts')
 	</body>
-
+	
 	<!--end::Body-->
+	<!--begin::Scripts-->
+	@include('layouts.scripts')
 </html>

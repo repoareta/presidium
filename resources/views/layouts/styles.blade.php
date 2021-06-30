@@ -24,3 +24,12 @@
 
 <!--end::Layout Themes-->
 <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+
+<!--begin::custom Css-->
+<style>
+    .swal2-popup .swal2-icon {
+        margin: auto;
+        margin-top: 30px;
+    }
+</style>
+<!--end::custom Css-->
