@@ -6,6 +6,8 @@ use App\Http\Controllers\PasienCovidController;
 use App\Http\Controllers\PenyintasCovidController;
 use App\Http\Controllers\TenagaKesehatanController;
 // Admin
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PasienCovidController as AdminPasienCovidController;
 use App\Http\Controllers\Admin\PenyintasCovidController as AdminPenyintasCovidController;
 use App\Http\Controllers\Admin\TenagaKesehatanController as AdminTenagaKesehatanController;
@@ -59,21 +61,48 @@ Route::prefix('admin')->name('admin.')->group(function () {
             
         // Dashboard
         Route::get('/', function () {
-            return view('welcome');
+            return view('admin.welcome');
         })->name('dashboard');
+
+        // Profil
+        Route::prefix('profil')->group(function () {
+            
+            Route::get('/', [ProfileController::class, 'index'])->name('profil');
+            Route::put('/', [ProfileController::class, 'update'])->name('profil.update');
+            Route::get('/password', [ProfileController::class, 'indexPassword'])->name('profil.password');
+            Route::put('/password', [ProfileController::class, 'updatePassword'])->name('profil.password.update');
+            
+        });
+
+        // // Master Data
+        // Route::prefix('master')->name('master.')->group(function () {
+            
+        //     // Users
+        //     Route::get('/users', [UserController::class, 'index'])->name('users.');
+        //     Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+        //     Route::get('/create', [UserController::class, 'create'])->name('users.create');
+        //     Route::post('/store', [UserController::class, 'store'])->name('users.store');
+        //     Route::put('/update/{id}', [UserController::class, 'update'])->name('users.update');
+        //     Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+        // });
 
         // Report
         Route::prefix('report')->name('report.')->group(function () {
             
-            // Pasien Covid
-            Route::get('/pasien-covid', [AdminPasienCovidController::class, 'index'])->name('pasien_covid');
-            Route::get('/pasien-covid/export-excel', [AdminPasienCovidController::class, 'exportExcel'])->name('pasien_covid.excel');
-            // Penyintas Covid
-            Route::get('/penyintas-covid', [AdminPenyintasCovidController::class, 'index'])->name('penyintas_covid');
-            Route::get('/penyintas-covid/export-excel', [AdminPenyintasCovidController::class, 'exportExcel'])->name('penyintas_covid.excel');
-            // Tenaga Kesehatan
-            Route::get('/tenaga-kesehatan', [AdminTenagaKesehatanController::class, 'index'])->name('tenaga_kesehatan');
-            Route::get('/tenaga-kesehatan/export-excel', [AdminTenagaKesehatanController::class, 'exportExcel'])->name('tenaga_kesehatan.excel');
+            Route::prefix('formulir')->name('formulir.')->group(function () {
+
+                // Pasien Covid
+                Route::get('/pasien-covid', [AdminPasienCovidController::class, 'index'])->name('pasien_covid.');
+                Route::get('/pasien-covid/export-excel', [AdminPasienCovidController::class, 'exportExcel'])->name('pasien_covid.excel');
+                // Penyintas Covid
+                Route::get('/penyintas-covid', [AdminPenyintasCovidController::class, 'index'])->name('penyintas_covid.');
+                Route::get('/penyintas-covid/export-excel', [AdminPenyintasCovidController::class, 'exportExcel'])->name('penyintas_covid.excel');
+                // Tenaga Kesehatan
+                Route::get('/tenaga-kesehatan', [AdminTenagaKesehatanController::class, 'index'])->name('tenaga_kesehatan.');
+                Route::get('/tenaga-kesehatan/export-excel', [AdminTenagaKesehatanController::class, 'exportExcel'])->name('tenaga_kesehatan.excel');
+                
+            });
 
         });
 

@@ -1,7 +1,7 @@
 @extends('layouts.layout-admin')
 
 @section('breadcrumb')
-    {{ Breadcrumbs::render('dashboard') }}
+    {{ Breadcrumbs::render('penyintas-covid') }}
 @endsection
 
 @push('page-styles')
@@ -19,7 +19,7 @@
                 <small class="">Data Penyintas Covid Ti94</small></h3>
             </div>
             <div class="card-toolbar">
-                <a href="{{ route('admin.report.penyintas_covid.excel') }}" class="btn btn-light-primary font-weight-bolder">
+                <a href="{{ route('admin.report.formulir.penyintas_covid.excel') }}" class="btn btn-light-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Design/PenAndRuller.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

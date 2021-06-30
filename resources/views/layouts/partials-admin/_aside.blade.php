@@ -42,8 +42,8 @@
 
 							<!--begin::Menu Nav-->
 							<ul class="menu-nav">
-								<li class="menu-item menu-item-active" aria-haspopup="true">
-									<a href="#" class="menu-link">
+								<li class="menu-item m{{ Route::is('admin.dashboard') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+									<a href="{{ route('admin.dashboard') }}" class="menu-link">
 										<span class="svg-icon menu-icon">
 
 											<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
@@ -60,7 +60,7 @@
 										<span class="menu-text">Dashboard</span>
 									</a>
 								</li>
-								<li class="menu-section">
+								{{-- <li class="menu-section">
 									<h4 class="menu-text">Master Data</h4>
 									<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 								</li>								
@@ -81,12 +81,12 @@
 										</span>
 										<span class="menu-text">Users</span>
 									</a>
-								</li>
+								</li> --}}
 								<li class="menu-section">
 									<h4 class="menu-text">Report</h4>
 									<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 								</li>
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<li class="menu-item menu-item-submenu {{ Route::is('admin.report.formulir.*') ? 'menu-open menu-item-open' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
 									<a href="javascript:;" class="menu-link menu-toggle">
 										<span class="svg-icon menu-icon">
 											<!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Design/Bucket.svg-->
@@ -102,7 +102,7 @@
 										<span class="menu-text">Formulir</span>
 										<i class="menu-arrow"></i>
 									</a>
-									<div class="menu-submenu" style="display: none; overflow: hidden;" kt-hidden-height="80">
+									<div class="menu-submenu">
 										<i class="menu-arrow"></i>
 										<ul class="menu-subnav">
 											<li class="menu-item menu-item-parent" aria-haspopup="true">
@@ -110,24 +110,24 @@
 													<span class="menu-text">Formulir</span>
 												</span>
 											</li>
-											<li class="menu-item" aria-haspopup="true">
-												<a href="#" class="menu-link">
+											<li class="menu-item {{ Route::is('admin.report.formulir.tenaga_kesehatan.*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+												<a href="{{ route('admin.report.formulir.tenaga_kesehatan.') }}" class="menu-link">
 													<i class="menu-bullet menu-bullet-dot">
 														<span></span>
 													</i>
 													<span class="menu-text">Tenaga Kesehatan</span>
 												</a>
 											</li>
-											<li class="menu-item" aria-haspopup="true">
-												<a href="#" class="menu-link">
+											<li class="menu-item {{ Route::is('admin.report.formulir.penyintas_covid.*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+												<a href="{{ route('admin.report.formulir.penyintas_covid.') }}" class="menu-link">
 													<i class="menu-bullet menu-bullet-dot">
 														<span></span>
 													</i>
 													<span class="menu-text">Penyintas Covid</span>
 												</a>
 											</li>
-											<li class="menu-item" aria-haspopup="true">
-												<a href="#" class="menu-link">
+											<li class="menu-item {{ Route::is('admin.report.formulir.pasien_covid.*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+												<a href="{{ route('admin.report.formulir.pasien_covid.') }}" class="menu-link">
 													<i class="menu-bullet menu-bullet-dot">
 														<span></span>
 													</i>

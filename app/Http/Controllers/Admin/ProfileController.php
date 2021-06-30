@@ -6,14 +6,18 @@ use App\Http\Controllers\Controller;
 
 // use Request
 use Illuminate\Http\Request;
+use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\ProfilePasswordRequest;
 
 // use Model
 use App\Models\User;
 
 // use Plugin
-use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,32 +26,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        if(request()->ajax()){
-            $Query = User::all();
-            return DataTables::of($Query)
-                ->addIndexColumn()
-                ->addColumn('name', function($data){
-                    return $data->name;
-                })
-                ->addColumn('email', function($data){
-                    return $data->email;
-                })
-                ->addColumn('action', function($data){
-                    return '
-                    <td nowrap="nowrap">
-                        <a href="'. route("admin.master.users.edit", $data->id) . '" class="btn btn-clean btn-icon mr-2" title="Edit details">
-                            <i class="la la-edit icon-xl"></i>
-                        </a>
-                        <a href="javascript:;" class="btn btn-clean btn-icon mr-2" data-id="'.$data->id.'" title="Delete details" id="deleteCoach">
-                            <i class="la la-trash icon-lg"></i>
-                        </a>
-                    </td>
-                    ';
-                })
-                ->make();
-        }
+        return view('admin.profile.index');
+    }
 
-        return view('admin.master-data.users.index');
+    public function indexPassword()
+    {
+        return view('admin.profile.index-password');
     }
 
     /**
@@ -100,9 +84,33 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProfileRequest $request)
     {
-        //
+        $data = User::find(Auth::user()->id);
+
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->update();
+
+        Alert::success('Update Profile Berhasil')->persistent(true)->autoClose(3000);
+        return redirect()->back();
+    }
+
+    public function updatePassword(ProfilePasswordRequest $request)
+    {
+        $data = User::find(Auth::user()->id);
+
+        $cekPassLama = Hash::check($request->password_lama, $data->password);
+        if(!$cekPassLama){
+            Alert::error('Password Lama Tidak Sama')->persistent(true)->autoClose(3000);
+            return redirect()->back();
+        }
+
+        $data->password = Hash::make($request->password_baru);
+        $data->update();
+
+        Alert::success('Update Password Berhasil')->persistent(true)->autoClose(3000);
+        return redirect()->back();
     }
 
     /**
