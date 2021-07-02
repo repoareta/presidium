@@ -34,7 +34,7 @@ class TenagaKesehatanController extends Controller
                     return $data->nama;
                 })
                 ->addColumn('kelas', function($data){
-                    return $data->kelas;
+                    return $data->kelas->nama;
                 })
                 ->addColumn('profesi', function($data){
                     return $data->profesi;
@@ -42,11 +42,17 @@ class TenagaKesehatanController extends Controller
                 ->addColumn('ket_profesi', function($data){
                     return $data->ket_profesi;
                 })
-                ->addColumn('kota', function($data){
-                    return $data->kota;
+                ->addColumn('province', function($data){
+                    return $data->province->name;
                 })
-                ->addColumn('provinsi', function($data){
-                    return $data->provinsi;
+                ->addColumn('regency', function($data){
+                    return $data->regency->name;
+                })
+                ->addColumn('district', function($data){
+                    return $data->district->name;
+                })
+                ->addColumn('village', function($data){
+                    return $data->village->name;
                 })
                 ->addColumn('instansi', function($data){
                     return $data->instansi;

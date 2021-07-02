@@ -25,9 +25,12 @@ class PasienCovidRequest extends FormRequest
     {
         return [
             'nama' => 'required',
-            'kelas' => 'required',
+            'kelas_id' => 'required',
+            'village_id' => 'required',
+            'regency_id' => 'required',
+            'district_id' => 'required',
+            'village_id' => 'required',
             'jenkel' => 'required',
-            'kota' => 'required',
             'kondisi' => 'required',
             'support' => 'required',
         ];

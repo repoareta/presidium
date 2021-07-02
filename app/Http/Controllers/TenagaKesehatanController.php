@@ -8,6 +8,8 @@ use App\Http\Requests\TenagaKesehatanRequest;
 
 // load Model
 use App\Models\TenagaKesehatan;
+use App\Models\Province;
+use App\Models\Kelas;
 
 // load Plugin
 use RealRashid\SweetAlert\Facades\Alert;
@@ -31,7 +33,9 @@ class TenagaKesehatanController extends Controller
      */
     public function create()
     {
-        return view('user.forms.tenaga-kesehatan.create');
+        $kelas = Kelas::all();
+        $provinces = Province::all();
+        return view('user.forms.tenaga-kesehatan.create', compact('kelas', 'provinces'));
     }
 
     /**
@@ -45,7 +49,7 @@ class TenagaKesehatanController extends Controller
         $Query = new TenagaKesehatan();
 
         $Query->nama = $request->nama;
-        $Query->kelas = $request->kelas;
+        $Query->kelas_id = $request->kelas_id;
         if($request->profesi == 'T'){
             if(!$request->profesi_sendiri){
                 return redirect()->back()->withErrors(['Input Profesi Jawaban Anda harus diisi']);
@@ -54,8 +58,10 @@ class TenagaKesehatanController extends Controller
         }
         $Query->profesi = $request->profesi;
         $Query->ket_profesi = $request->ket_profesi;
-        $Query->kota = $request->kota;
-        $Query->provinsi = $request->provinsi;
+        $Query->province_id = $request->province_id;
+        $Query->regency_id = $request->regency_id;
+        $Query->district_id = $request->district_id;
+        $Query->village_id = $request->village_id;
         $Query->instansi = $request->instansi;
         $Query->save();
 

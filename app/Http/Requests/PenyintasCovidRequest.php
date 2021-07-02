@@ -25,9 +25,12 @@ class PenyintasCovidRequest extends FormRequest
     {
         return [
             'nama' => 'required',
-            'kelas' => 'required',
+            'kelas_id' => 'required',
             'jenkel' => 'required',
-            'kota' => 'required',
+            'province_id' => 'required',
+            'district_id' => 'required',
+            'regency_id' => 'required',
+            'village_id' => 'required',
         ];
     }
 }

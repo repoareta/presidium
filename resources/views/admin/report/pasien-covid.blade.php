@@ -45,7 +45,10 @@
                             <th scope="col">Jenis Kelamin</th>
                             <th scope="col">Goldar</th>											
                             <th scope="col">Rhesus</th>
-                            <th scope="col">Kota</th>
+                            <th scope="col">Provinsi</th>
+                            <th scope="col">Kabupaten</th>
+                            <th scope="col">Kecamatan</th>
+                            <th scope="col">Desa</th>
                             <th scope="col">Kondisi</th>
                             <th scope="col">Support</th>
                         </tr>
@@ -89,7 +92,10 @@
 				{data: 'jenkel', name: 'jenkel'},
 				{data: 'goldar', name: 'goldar'},
 				{data: 'rhesus', name: 'rhesus'},
-				{data: 'kota', name: 'kota'},
+				{data: 'province', name: 'province'},
+				{data: 'regency', name: 'regency'},
+				{data: 'district', name: 'district'},
+				{data: 'village', name: 'village'},
 				{data: 'kondisi', name: 'kondisi'},
 				{data: 'support', name: 'support'},
 			]

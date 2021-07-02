@@ -1,7 +1,7 @@
 @extends('layouts.layout-admin')
 
 @section('breadcrumb')
-    {{ Breadcrumbs::render('dashboard') }}
+    {{ Breadcrumbs::render('users') }}
 @endsection
 
 @push('page-styles')
@@ -75,5 +75,48 @@
 			]
 		});
     } );
+
+    $('#dataTable tbody').on( 'click', '#deleteUser', function (e) {
+			e.preventDefault();
+			var id = $(this).attr('data-id');
+			Swal.fire({
+				title: "Are you sure?",
+				text: "You won't be able to revert this!" ,
+				icon: "warning",
+				confirmButtonText: "Delete",
+				confirmButtonColor: '#141D31',
+				showCancelButton: true,
+				reverseButtons: true
+			}).then(function(result) {
+				if (result.value) {
+					$.ajax({
+						url: "{{ route('admin.master.users.destroy') }}",
+						type: 'DELETE',
+						dataType: 'json',
+						data: {
+							"id": id,
+							"_token": "{{ csrf_token() }}",
+						},
+						success: function () {
+							Swal.fire({
+								title: "Delete Data Coach",
+								text: "success",
+								icon: "success",
+								buttonsStyling: false,
+								confirmButtonText: "Ok",
+								customClass: {
+									confirmButton: "btn btn-dark"
+								}
+							}).then(function() {
+								location.reload();
+							});
+						},
+						error: function () {
+							alert("An error occurred, please try again later.");
+						}
+					});
+				}
+			});
+		});
 </script>
 @endpush

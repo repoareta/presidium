@@ -8,6 +8,8 @@ use App\Http\Requests\PasienCovidRequest;
 
 // load Model
 use App\Models\PasienCovid;
+use App\Models\Kelas;
+use App\Models\Province;
 
 // load Plugin
 use RealRashid\SweetAlert\Facades\Alert;
@@ -31,7 +33,9 @@ class PasienCovidController extends Controller
      */
     public function create()
     {
-        return view('user.forms.pasien-covid.create');
+        $kelas = Kelas::all();
+        $provinces = Province::all();
+        return view('user.forms.pasien-covid.create', compact('kelas', 'provinces'));
     }
 
     /**
@@ -45,11 +49,14 @@ class PasienCovidController extends Controller
         $Query = new PasienCovid();
 
         $Query->nama = $request->nama;
-        $Query->kelas = $request->kelas;
+        $Query->kelas_id = $request->kelas_id;
         $Query->jenkel = $request->jenkel;
         $Query->goldar = $request->goldar;
         $Query->rhesus = $request->rhesus;
-        $Query->kota = $request->kota;
+        $Query->province_id = $request->province_id;
+        $Query->regency_id = $request->regency_id;
+        $Query->district_id = $request->district_id;
+        $Query->village_id = $request->village_id;
 
         if($request->kondisi == 'T'){
             if(!$request->kondisi_sendiri){

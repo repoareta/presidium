@@ -66,10 +66,15 @@
                 <!--begin::Card-->
                 <div class="card card-custom gutter-b">
                     <!--begin::Body-->
-                    <div class="card-body">
+                    <div class="card-body"> 
                         <div class="form-group">
-                            <label class="font-size-h4">Nama Lengkap <span class="text-danger font-size-sm">*</span></label>
-                            <input type="text" class="form-control mt-3" name="nama" placeholder="Jawaban anda">
+                            <label class="font-size-h4">Kelas <span class="text-danger font-size-sm">*</span></label>
+                            <select class="kt-select2 form-control" name="kelas_id" id="kelasSelect2">
+                                <option value="">Pilih Kelas</option>
+                                @foreach ($kelas as $kls)
+                                    <option value="{{ $kls->id }}">{{ $kls->nama }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <!--end::Body-->
@@ -78,60 +83,17 @@
                 <!--begin::Card-->
                 <div class="card card-custom gutter-b">
                     <!--begin::Body-->
-                    <div class="card-body"> 
+                    <div class="card-body">
                         <div class="form-group">
-                            <label class="font-size-h4">Kelas <span class="text-danger font-size-sm">*</span></label>
-                            <div class="radio-list mt-3">
-                                <label class="radio">
-                                    <input type="radio" name="kelas" value="Maverick - Fis1">
-                                    <span></span>Maverick - Fis1
-                                </label>
-                                <label class="radio">
-                                    <input type="radio" name="kelas" value="Blitzkrieg - Fis2">
-                                    <span></span>Blitzkrieg - Fis2
-                                </label>
-                                <label class="radio">
-                                    <input type="radio" name="kelas" value="Scream - Fis3">
-                                    <span></span>Scream - Fis3
-                                </label>
-                                <label class="radio">
-                                    <input type="radio" name="kelas" value="Exist - Fis4">
-                                    <span></span>Exist - Fis4
-                                </label>
-                                <label class="radio">
-                                    <input type="radio" name="kelas" value="Strive - Fis5">
-                                    <span></span>Strive - Fis5
-                                </label>
-                                <label class="radio">
-                                    <input type="radio" name="kelas" value="Geteks - Fis6">
-                                    <span></span>Geteks - Fis6
-                                </label>
-                                <label class="radio">
-                                    <input type="radio" name="kelas" value="Toelalith - Fis7">
-                                    <span></span>Toelalith - Fis7
-                                </label>
-                                <label class="radio">
-                                    <input type="radio" name="kelas" value="Error - Fis8">
-                                    <span></span>Error - Fis8
-                                </label>
-                                <label class="radio">
-                                    <input type="radio" name="kelas" value="Boomers - Bio1">
-                                    <span></span>Boomers - Bio1
-                                </label>
-                                <label class="radio">
-                                    <input type="radio" name="kelas" value="Beerers - Bio2">
-                                    <span></span>Beerers - Bio2
-                                </label>
-                                <label class="radio">
-                                    <input type="radio" name="kelas" value="Solid - Sos">
-                                    <span></span>Solid - Sos
-                                </label>
-                            </div>
+                            <label class="font-size-h4">Nama Lengkap <span class="text-danger font-size-sm">*</span></label>
+                            <select class="kt-select2 form-control" name="nama" id="namaSelect2">
+                                <option value="">Pilih Nama</option>
+                            </select>
                         </div>
                     </div>
                     <!--end::Body-->
                 </div>
-                <!--end::Card-->
+                <!--end::Card-->                
                 <!--begin::Card-->
                 <div class="card card-custom gutter-b">
                     <!--begin::Body-->
@@ -182,8 +144,55 @@
                     <!--begin::Body-->
                     <div class="card-body">
                         <div class="form-group">
-                            <label class="font-size-h4">Kota Domisili <span class="text-danger font-size-sm">*</span></label>
-                            <input type="text" class="form-control mt-3" name="kota" placeholder="Jawaban anda">
+                            <label class="font-size-h4">Provinsi <span class="text-danger font-size-sm">*</span></label>
+                            <select class="kt-select2 form-control" name="province_id" id="provinceSelect2">
+                                <option value="">Pilih Provinsi</option>
+                                @foreach ($provinces as $province)
+                                    <option value="{{ $province->id }}">{{ $province->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Card-->
+                <!--begin::Card-->
+                <div class="card card-custom gutter-b">
+                    <!--begin::Body-->
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="font-size-h4">Kabupaten <span class="text-danger font-size-sm">*</span></label>
+                            <select class="kt-select2 form-control" name="regency_id" id="regencySelect2">
+                                <option value="">Pilih Kabupaten</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Card-->
+                <!--begin::Card-->
+                <div class="card card-custom gutter-b">
+                    <!--begin::Body-->
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="font-size-h4">Kecamatan <span class="text-danger font-size-sm">*</span></label>
+                            <select class="kt-select2 form-control" name="district_id" id="districtSelect2">
+                                <option value="">Pilih Kabupaten</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Card-->
+                <!--begin::Card-->
+                <div class="card card-custom gutter-b">
+                    <!--begin::Body-->
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="font-size-h4">Desa <span class="text-danger font-size-sm">*</span></label>
+                            <select class="kt-select2 form-control" name="village_id" id="villageSelect2">
+                                <option value="">Pilih Desa</option>
+                            </select>
                         </div>
                     </div>
                     <!--end::Body-->
@@ -268,4 +277,86 @@
 @endsection
 
 @push('page-scripts')
+<script>
+    $(document).ready(function () {
+        $('.kt-select2').select2();
+    });
+
+    $("#kelasSelect2").select2().on('change', function() {
+        var kelas = $('#kelasSelect2');
+        $.ajax({
+                url:"../api/alumni/" + kelas.val(),
+                type:'GET',
+                success:function(data) {
+                    var alumni = $("#namaSelect2");
+                    alumni.empty();
+                    alumni.append($("<option></option>").attr("value", '').text('Pilih Nama'));
+                    $.each(data, function(value, key) {
+                        alumni.append($("<option></option>").attr("value", value).text(value));
+                    }); 
+                    alumni.select2();
+                }
+            });
+    }).trigger('change');
+
+    $("#provinceSelect2").select2().on('change', function() {
+        var province = $('#provinceSelect2');
+        $.ajax({
+                url:"../api/regency/" + province.val(),
+                type:'GET',
+                success:function(data) {
+                    var regency = $("#regencySelect2");
+                    var district = $("#districtSelect2");
+                    var village = $("#villageSelect2");
+                    regency.empty();
+                    district.empty();
+                    village.empty();
+                    regency.append($("<option></option>").attr("value", '').text('Pilih Kabupaten'));
+                    district.append($("<option></option>").attr("value", '').text('Pilih Kecamatan'));
+                    village.append($("<option></option>").attr("value", '').text('Pilih Desa'));
+                    $.each(data, function(value, key) {
+                        regency.append($("<option></option>").attr("value", key).text(value));
+                    }); 
+                    regency.select2();
+                }
+            });
+    }).trigger('change');
+
+    $("#regencySelect2").select2().on('change', function() {
+        var regency = $('#regencySelect2');
+        $.ajax({
+                url:"../api/district/" + regency.val(),
+                type:'GET',
+                success:function(data) {
+                    var district = $("#districtSelect2");
+                    var village = $("#villageSelect2");
+                    district.empty();
+                    village.empty();
+                    district.append($("<option></option>").attr("value", '').text('Pilih Kecamatan'));
+                    village.append($("<option></option>").attr("value", '').text('Pilih Desa'));
+                    $.each(data, function(value, key) {
+                        district.append($("<option></option>").attr("value", key).text(value));
+                    }); 
+                    district.select2();
+                }
+            });
+    }).trigger('change');
+
+    $("#districtSelect2").select2().on('change', function() {
+        var district = $('#districtSelect2');
+        $.ajax({
+                url:"../api/village/" + district.val(),
+                type:'GET',
+                success:function(data) {
+                    var village = $("#villageSelect2");
+                    village.empty();
+                    village.append($("<option></option>").attr("value", '').text('Pilih Desa'));
+                    $.each(data, function(value, key) {
+                        village.append($("<option></option>").attr("value", key).text(value));
+                    }); 
+                    village.select2();
+                }
+            });
+    }).trigger('change');
+</script>
 @endpush

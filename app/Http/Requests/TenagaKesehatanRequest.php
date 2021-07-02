@@ -25,8 +25,13 @@ class TenagaKesehatanRequest extends FormRequest
     {
         return [
             'nama' => 'required',
-            'kelas' => 'required',
+            'kelas_id' => 'required',
             'profesi' => 'required',
+            'instansi' => 'required',
+            'province_id' => 'required',
+            'district_id' => 'required',
+            'regency_id' => 'required',
+            'village_id' => 'required',
         ];
     }
 }

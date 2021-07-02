@@ -16,14 +16,18 @@ class PenyintasCovidExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        $datas = PenyintasCovid::select(
+        $datas = PenyintasCovid::with(['kelas', 'province', 'regency', 'district', 'village'])
+            ->select(
             'nama',
-            'kelas',
+            'kelas_id',
             'jenkel',
             'goldar',
             'rhesus',
             'sembuh',
-            'kota',
+            'province_id',
+            'regency_id',
+            'district_id',
+            'village_id',
             'donor_plasma')
             ->get();
         
@@ -39,6 +43,11 @@ class PenyintasCovidExport implements FromCollection, WithHeadings
             }else{
                 $data->donor_plasma = 'Tidak';
             }
+            $data->kelas_id = $data->kelas->nama;
+            $data->province_id = $data->province->name;
+            $data->regency_id = $data->regency->name;
+            $data->district_id = $data->district->name;
+            $data->village_id = $data->village->name;
         }
 
         return $datas;
@@ -46,6 +55,18 @@ class PenyintasCovidExport implements FromCollection, WithHeadings
 
     public function headings() : array
     {
-        return ['Nama','Kelas','Jenkel','Goldar','Rhesus','Tanggal Sembuh','Kota Domisili','Donor Plasma'];
+        return [
+            'Nama',
+            'Kelas',
+            'Jenkel',
+            'Goldar',
+            'Rhesus',
+            'Tanggal Sembuh',
+            'Provinsi',
+            'Kabupaten',
+            'Kecamatan',
+            'Desa',
+            'Donor Plasma'
+        ];
     }
 }

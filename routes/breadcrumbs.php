@@ -25,18 +25,41 @@ Breadcrumbs::for('formulir', function ($trail) {
     $trail->parent('report');
     $trail->push('Formulir', '#');
 });
-// Tenaga Kesehatan
-Breadcrumbs::for('tenaga-kesehatan', function ($trail) {
-    $trail->parent('formulir');
-    $trail->push('Tenaga Kesehatan', route('admin.report.formulir.tenaga_kesehatan.'));
+    // Tenaga Kesehatan
+    Breadcrumbs::for('tenaga-kesehatan', function ($trail) {
+        $trail->parent('formulir');
+        $trail->push('Tenaga Kesehatan', route('admin.report.formulir.tenaga_kesehatan.'));
+    });
+    // Pasien Covid
+    Breadcrumbs::for('pasien-covid', function ($trail) {
+        $trail->parent('formulir');
+        $trail->push('Pasien Covid', route('admin.report.formulir.pasien_covid.'));
+    });
+    // Penyintas Covid
+    Breadcrumbs::for('penyintas-covid', function ($trail) {
+        $trail->parent('formulir');
+        $trail->push('Penyintas Covid', route('admin.report.formulir.penyintas_covid.'));
+    });
+// Master Data
+// Report
+Breadcrumbs::for('master', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('Master', '#');
 });
-// Pasien Covid
-Breadcrumbs::for('pasien-covid', function ($trail) {
-    $trail->parent('formulir');
-    $trail->push('Pasien Covid', route('admin.report.formulir.pasien_covid.'));
-});
-// Penyintas Covid
-Breadcrumbs::for('penyintas-covid', function ($trail) {
-    $trail->parent('formulir');
-    $trail->push('Penyintas Covid', route('admin.report.formulir.penyintas_covid.'));
-});
+    // Users
+    Breadcrumbs::for('users', function ($trail) {
+        $trail->parent('master');
+        $trail->push('Users', route('admin.master.users.'));
+    });
+    Breadcrumbs::for('users-create', function ($trail) {
+        $trail->parent('users');
+        $trail->push('Create', route('admin.master.users.create'));
+    });
+    Breadcrumbs::for('users-edit', function ($trail, $data) {
+        $trail->parent('users');
+        $trail->push('Edit', route('admin.master.users.edit', $data->id));
+    });
+    Breadcrumbs::for('users-edit-pass', function ($trail, $data) {
+        $trail->parent('users-edit', $data);
+        $trail->push('Edit Pass', route('admin.master.users_pass.edit', $data->id));
+    });

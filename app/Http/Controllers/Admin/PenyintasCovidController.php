@@ -35,7 +35,7 @@ class PenyintasCovidController extends Controller
                     return $data->nama;
                 })
                 ->addColumn('kelas', function($data){
-                    return $data->kelas;
+                    return $data->kelas->nama;
                 })
                 ->addColumn('jenkel', function($data){
                     return $data->jenkel == 'L' ? 'Laki-laki' : 'Perempuan';
@@ -49,8 +49,17 @@ class PenyintasCovidController extends Controller
                 ->addColumn('sembuh', function($data){
                     return Carbon::parse($data->sembuh)->locale('id')->isoFormat('LL');
                 })
-                ->addColumn('kota', function($data){
-                    return $data->kota;
+                ->addColumn('province', function($data){
+                    return $data->province->name;
+                })
+                ->addColumn('regency', function($data){
+                    return $data->regency->name;
+                })
+                ->addColumn('district', function($data){
+                    return $data->district->name;
+                })
+                ->addColumn('village', function($data){
+                    return $data->village->name;
                 })
                 ->addColumn('donor_plasma', function($data){
                     return $data->donor_plasma == true ? 'Iya' : 'Tidak';

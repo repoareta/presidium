@@ -15,16 +15,20 @@ class PasienCovidExport implements FromCollection, WithHeadings
     use Exportable;
     public function collection()
     {
-        $datas = PasienCovid::select(
+        $datas = PasienCovid::with(['kelas', 'province', 'regency','district','village'])
+                            ->select(
                                 'nama',
-                                'kelas',
+                                'kelas_id',
                                 'jenkel',
                                 'goldar',
                                 'rhesus',
-                                'kota',
+                                'province_id',
+                                'regency_id',
+                                'district_id',
+                                'village_id',
                                 'kondisi',
                                 'support')
-                                ->get();
+                            ->get();
         
         foreach($datas as $data){
             if($data->jenkel == 'L'){
@@ -32,6 +36,11 @@ class PasienCovidExport implements FromCollection, WithHeadings
             }else{
                 $data->jenkel = 'Perempuan';
             }
+            $data->kelas_id = $data->kelas->nama;
+            $data->province_id = $data->province->name;
+            $data->regency_id = $data->regency->name;
+            $data->district_id = $data->district->name;
+            $data->village_id = $data->village->name;
         }
 
         return $datas;
@@ -39,6 +48,18 @@ class PasienCovidExport implements FromCollection, WithHeadings
 
     public function headings() : array
     {
-        return ['Nama','Kelas','Jenkel','Goldar','Rhesus','Kota Domisili','Kondisi Saat Ini','Support yang Diperlukan Saat Ini'];
+        return [
+            'Nama',
+            'Kelas',
+            'Jenkel',
+            'Goldar',
+            'Rhesus',
+            'Provinsi',
+            'Kabupaten',
+            'Kecamatan',
+            'Desa',
+            'Kondisi Saat Ini',
+            'Support yang Diperlukan Saat Ini'
+        ];
     }
 }

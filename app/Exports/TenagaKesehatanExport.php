@@ -15,21 +15,33 @@ class TenagaKesehatanExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        $datas = TenagaKesehatan::select(
-                                    'nama',
-                                    'kelas',
-                                    'profesi',
-                                    'ket_profesi',
-                                    'kota',
-                                    'provinsi',
-                                    'instansi')
-                                    ->get();
+        $datas = TenagaKesehatan::with(['kelas','province', 'regency','village','district'])
+                                ->select('nama','kelas_id','profesi','ket_profesi', 'province_id','regency_id', 'district_id','village_id')->get();
 
-        return $datas;
+        foreach($datas as $data){
+
+                $data->kelas_id = $data->kelas->nama;
+                $data->province_id = $data->province->name;
+                $data->regency_id = $data->regency->name;
+                $data->district_id = $data->district->name;
+                $data->village_id = $data->village->name;
+        }
+
+        return $datas->setAutoSize(true);
     }
     
     public function headings() : array
     {
-        return ['Nama','Kelas','Profesi','Keterangan','Tempat Bekerja - Kota','Tempat Bekerja - Provinsi','Tempat Bekerja - Instansi'];
+        return [
+            'Nama',
+            'Kelas',
+            'Profesi',
+            'Keterangan',
+            'Tempat Bekerja - Provinsi',
+            'Tempat Bekerja - Kabupaten',
+            'Tempat Bekerja - Kecamatan',
+            'Tempat Bekerja - Desa',
+            'Tempat Bekerja - Instansi'
+        ];
     }
 }

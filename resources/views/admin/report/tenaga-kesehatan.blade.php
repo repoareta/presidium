@@ -43,9 +43,11 @@
                             <th scope="col">Nama</th>
                             <th scope="col">Kelas</th>
                             <th scope="col">Profesi</th>
-                            <th scope="col">Keterangan</th>											
-                            <th scope="col">Tempat Bekerja - Kota</th>
+                            <th scope="col">Keterangan</th>
                             <th scope="col">Tempat Bekerja - Provinsi</th>
+                            <th scope="col">Tempat Bekerja - Kabupaten</th>
+                            <th scope="col">Tempat Bekerja - Kecamatan</th>
+                            <th scope="col">Tempat Bekerja - Desa</th>
                             <th scope="col">Tempat Bekerja - Intansi</th>
                         </tr>
                     </thead>
@@ -87,8 +89,10 @@
 				{data: 'kelas', name: 'kelas'},
 				{data: 'profesi', name: 'profesi'},
 				{data: 'ket_profesi', name: 'ket_profesi'},
-				{data: 'kota', name: 'kota'},
-				{data: 'provinsi', name: 'provinsi'},
+				{data: 'province', name: 'province'},
+				{data: 'regency', name: 'regency'},
+				{data: 'district', name: 'district'},
+				{data: 'village', name: 'village'},
 				{data: 'instansi', name: 'instansi'},
 			]
 		});

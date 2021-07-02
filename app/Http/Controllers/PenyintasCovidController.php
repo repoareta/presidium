@@ -8,6 +8,8 @@ use App\Http\Requests\PenyintasCovidRequest;
 
 // load Model
 use App\Models\PenyintasCovid;
+use App\Models\Province;
+use App\Models\Kelas;
 
 // load Plugin
 use RealRashid\SweetAlert\Facades\Alert;
@@ -32,7 +34,9 @@ class PenyintasCovidController extends Controller
      */
     public function create()
     {
-        return view('user.forms.penyintas-covid.create');
+        $kelas = Kelas::all();
+        $provinces = Province::all();
+        return view('user.forms.penyintas-covid.create', compact('kelas', 'provinces'));
     }
 
     /**
@@ -46,12 +50,15 @@ class PenyintasCovidController extends Controller
         $Query = New PenyintasCovid();
 
         $Query->nama = $request->nama;
-        $Query->kelas = $request->kelas;
+        $Query->kelas_id = $request->kelas_id;
         $Query->jenkel = $request->jenkel;
         $Query->goldar = $request->goldar;
         $Query->rhesus = $request->rhesus;
         $Query->sembuh = Carbon::parse($request->sembuh)->format('Y-m-d');
-        $Query->kota = $request->kota;
+        $Query->province_id = $request->province_id;
+        $Query->village_id = $request->village_id;
+        $Query->regency_id = $request->regency_id;
+        $Query->district_id = $request->district_id;
         $Query->donor_plasma = $request->donor_plasma == 'T' ? true : false ;
         $Query->save();
 

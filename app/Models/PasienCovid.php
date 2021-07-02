@@ -10,8 +10,12 @@ class PasienCovid extends Model
     use HasFactory;
 
     protected $fillable = [
+        'province_id',
+        'regency_id',
+        'district_id',
+        'village_id',
         'nama',
-        'kelas',
+        'kelas_id',
         'jenkel',
         'goldar',
         'rhesus',
@@ -21,4 +25,29 @@ class PasienCovid extends Model
     ];
 
     protected $table = 'pasien_covid';
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id', 'id');
+    }
+    
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'province_id', 'id');
+    }
+
+    public function regency()
+    {
+        return $this->belongsTo(Regency::class, 'regency_id', 'id');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class, 'district_id', 'id');
+    }
+    
+    public function village()
+    {
+        return $this->belongsTo(Village::class, 'village_id', 'id');
+    }
 }

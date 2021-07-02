@@ -1,7 +1,7 @@
 @extends('layouts.layout-admin')
 
 @section('breadcrumb')
-    {{ Breadcrumbs::render('dashboard') }}
+    {{ Breadcrumbs::render('users-create') }}
 @endsection
 
 @push('page-styles')
@@ -27,15 +27,15 @@
     @endif  
     <!--begin::Card-->
     <div class="card card-custom" id="kt_page_sticky_card">
-        <div class="card-header" style="">
+        <div class="card-header justify-content-between align-items-center">
             <div class="card-title">
                 <h3 class="card-label">Tambah Data User 
                 <i class="mr-2"></i>
                 <small class="">Data User</small></h3>
-                <a href="{{ route('admin.master.users.index') }}" class="btn btn-light-primary font-weight-bolder">
-                    Back
-                </a>
             </div>
+            <a href="{{ route('admin.master.users.') }}" class="btn btn-light-primary font-weight-bolder">
+                Back
+            </a>
         </div>
         <div class="card-body">
             <form action="{{ route('admin.master.users.store') }}" method="post">
@@ -49,8 +49,15 @@
                     <input type="email" class="form-control mt-3" name="email">
                 </div>
                 <div class="form-group">
-                    <label class="font-size-h4">Password <span class="text-danger font-size-sm">*</span></label>
-                    <input type="password" class="form-control mt-3" name="password">
+                    <label class="font-size-h4">Password Baru <span class="text-danger font-size-sm">*</span></label>
+                    <input type="password" class="form-control mt-3" name="password_baru">
+                </div>
+                <div class="form-group">
+                    <label class="font-size-h4">Konfirmasi Password <span class="text-danger font-size-sm">*</span></label>
+                    <input type="password" class="form-control mt-3" name="password_konfirmasi">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>
         </div>

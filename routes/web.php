@@ -7,6 +7,7 @@ use App\Http\Controllers\PenyintasCovidController;
 use App\Http\Controllers\TenagaKesehatanController;
 // Admin
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AlumniController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PasienCovidController as AdminPasienCovidController;
 use App\Http\Controllers\Admin\PenyintasCovidController as AdminPenyintasCovidController;
@@ -75,17 +76,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         // // Master Data
-        // Route::prefix('master')->name('master.')->group(function () {
+        Route::prefix('master')->name('master.')->group(function () {
             
-        //     // Users
-        //     Route::get('/users', [UserController::class, 'index'])->name('users.');
-        //     Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
-        //     Route::get('/create', [UserController::class, 'create'])->name('users.create');
-        //     Route::post('/store', [UserController::class, 'store'])->name('users.store');
-        //     Route::put('/update/{id}', [UserController::class, 'update'])->name('users.update');
-        //     Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+            // Users
+            Route::get('/users', [UserController::class, 'index'])->name('users.');
+            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+            Route::get('/edit-pass/{id}', [UserController::class, 'editPass'])->name('users_pass.edit');
+            Route::get('/create', [UserController::class, 'create'])->name('users.create');
+            Route::post('/store', [UserController::class, 'store'])->name('users.store');
+            Route::put('/update/{id}', [UserController::class, 'update'])->name('users.update');
+            Route::put('/update-pass/{id}', [UserController::class, 'updatePass'])->name('users_pass.update');
+            Route::delete('/destroy', [UserController::class, 'destroy'])->name('users.destroy');
 
-        // });
+            // Alumni
+            Route::get('/alumni', [AlumniController::class, 'index'])->name('alumni.');
+        });
 
         // Report
         Route::prefix('report')->name('report.')->group(function () {
