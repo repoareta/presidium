@@ -72,7 +72,9 @@
                             <select class="kt-select2 form-control" name="kelas_id" id="kelasSelect2">
                                 <option value="">Pilih Kelas</option>
                                 @foreach ($kelas as $kls)
-                                    <option value="{{ $kls->id }}">{{ $kls->nama }}</option>
+                                    <option value="{{ $kls->id }}" {{ old('kelas_id') == $kls->id ? 'selected' : '' }}>
+                                        {{ $kls->nama }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -86,7 +88,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label class="font-size-h4">Nama Lengkap <span class="text-danger font-size-sm">*</span></label>
-                            <select class="kt-select2 form-control" name="nama" id="namaSelect2">
+                            <select class="kt-select2 form-control" name="nama" id="namaSelect2" >
                                 <option value="">Pilih Nama</option>
                             </select>
                         </div>
@@ -102,11 +104,11 @@
                             <label class="font-size-h4">Jenis Kelamin <span class="text-danger font-size-sm">*</span></label>
                             <div class="radio-list mt-3">
                                 <label class="radio">
-                                    <input type="radio" name="jenkel" value="L">
+                                    <input type="radio" name="jenkel" value="L" {{ old('jenkel') == 'L' ? 'checked' : '' }}>
                                     <span></span>Laki - laki
                                 </label>
                                 <label class="radio">
-                                    <input type="radio" name="jenkel" value="P">
+                                    <input type="radio" name="jenkel" value="P" {{ old('jenkel') == 'P' ? 'checked' : '' }}>
                                     <span></span>Perempuan
                                 </label>                                
                             </div>
@@ -121,7 +123,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label class="font-size-h4">Golongan Darah</label>
-                            <input type="text" class="form-control mt-3" name="goldar" placeholder="Jawaban anda">
+                            <input type="text" class="form-control mt-3" name="goldar" placeholder="Jawaban anda" value="{{ old('goldar') }}">
                         </div>
                     </div>
                     <!--end::Body-->
@@ -133,7 +135,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label class="font-size-h4">Rhesus</label>
-                            <input type="text" class="form-control mt-3" name="rhesus" placeholder="Jawaban anda">
+                            <input type="text" class="form-control mt-3" name="rhesus" placeholder="Jawaban anda" value="{{ old('rhesus') }}">
                         </div>
                     </div>
                     <!--end::Body-->
@@ -148,7 +150,7 @@
                             <select class="kt-select2 form-control" name="province_id" id="provinceSelect2">
                                 <option value="">Pilih Provinsi</option>
                                 @foreach ($provinces as $province)
-                                    <option value="{{ $province->id }}">{{ $province->name }}</option>
+                                    <option value="{{ $province->id }}" {{ old('province_id') == $province->id ? 'selected' : '' }}>{{ $province->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -175,7 +177,7 @@
                     <!--begin::Body-->
                     <div class="card-body">
                         <div class="form-group">
-                            <label class="font-size-h4">Kecamatan <span class="text-danger font-size-sm">*</span></label>
+                            <label class="font-size-h4">Kecamatan</label>
                             <select class="kt-select2 form-control" name="district_id" id="districtSelect2">
                                 <option value="">Pilih Kabupaten</option>
                             </select>
@@ -189,7 +191,7 @@
                     <!--begin::Body-->
                     <div class="card-body">
                         <div class="form-group">
-                            <label class="font-size-h4">Desa <span class="text-danger font-size-sm">*</span></label>
+                            <label class="font-size-h4">Desa</label>
                             <select class="kt-select2 form-control" name="village_id" id="villageSelect2">
                                 <option value="">Pilih Desa</option>
                             </select>
@@ -206,26 +208,26 @@
                             <label class="font-size-h4">Kondisi Saat Ini <span class="text-danger font-size-sm">*</span></label>
                             <div class="radio-list mt-3">
                                 <label class="radio">
-                                    <input type="radio" name="kondisi" value="Isolasi Mandiri">
+                                    <input type="radio" name="kondisi" value="Isolasi Mandiri" {{ old('kondisi') == 'Isolasi Mandiri' ? 'checked' : '' }}>
                                     <span></span>Isolasi Mandiri
                                 </label>
                                 <label class="radio">
-                                    <input type="radio" name="kondisi" value="Isolasi di tempat khusus isolasi">
+                                    <input type="radio" name="kondisi" value="Isolasi di tempat khusus isolasi" {{ old('kondisi') == 'Isolasi di tempat khusus isolasi' ? 'checked' : '' }}>
                                     <span></span>Isolasi di tempat khusus isolasi
                                 </label>                                
                                 <label class="radio">
-                                    <input type="radio" name="kondisi" value="Dirawat di rumah sakit (ruang isolasi)">
+                                    <input type="radio" name="kondisi" value="Dirawat di rumah sakit (ruang isolasi)" {{ old('kondisi') == 'Dirawat di rumah sakit (ruang isolasi)' ? 'checked' : '' }}>
                                     <span></span>Dirawat di rumah sakit (ruang isolasi)
                                 </label>                                
                                 <label class="radio">
-                                    <input type="radio" name="kondisi" value="Dirawat di rumah sakit (ICU)">
+                                    <input type="radio" name="kondisi" value="Dirawat di rumah sakit (ICU)" {{ old('kondisi') == 'Dirawat di rumah rumah sakit (ICU)' ? 'checked' : '' }}>
                                     <span></span>Dirawat di rumah sakit (ICU)
                                 </label>                                
                                 <label class="radio">
-                                    <input type="radio" name="kondisi" value="T">
+                                    <input type="radio" name="kondisi" value="T" {{ old('kondisi') == 'T' ? 'checked' : '' }}>
                                     <span></span>Yang lain:
                                 </label>                                
-                                <input type="text" class="form-control" name="kondisi_sendiri" placeholder="Jawaban anda">
+                                <input type="text" class="form-control" name="kondisi_sendiri" placeholder="Jawaban anda" value="{{ old('kondisi_sendiri') }}">
                             </div>
                         </div>
                     </div>
@@ -240,26 +242,26 @@
                             <label class="font-size-h4">Support yang Diperlukan Saat Ini <span class="text-danger font-size-sm">*</span></label>
                             <div class="checkbox-list mt-3">
                                 <label class="checkbox">
-                                    <input type="checkbox" name="support[]" value="Obat-obatan dan vitamin">
+                                    <input type="checkbox" name="support[]" value="Obat-obatan dan vitamin" {{ old('support') == 'Obat-obatan dan vitamin' ? 'checked' : '' }}>
                                     <span></span>Obat-obatan dan vitamin
                                 </label>
                                 <label class="checkbox">
-                                    <input type="checkbox" name="support[]" value="Oksigen">
+                                    <input type="checkbox" name="support[]" value="Oksigen" {{ old('support') == 'Oksigen' ? 'checked' : '' }}>
                                     <span></span>Oksigen
                                 </label>
                                 <label class="checkbox">
-                                    <input type="checkbox" name="support[]" value="Makanan utama siap makan">
+                                    <input type="checkbox" name="support[]" value="Makanan utama siap makan" {{ old('support') == 'Makanan utama siap makan' ? 'checked' : '' }}>
                                     <span></span>Makanan utama siap makan
                                 </label>
                                 <label class="checkbox">
-                                    <input type="checkbox" name="support[]" value="Buah-buahan">
+                                    <input type="checkbox" name="support[]" value="Buah-buahan" {{ old('support') == 'Buah-buahan' ? 'checked' : '' }}>
                                     <span></span>Buah-buahan
                                 </label>
                                 <label class="checkbox">
-                                    <input type="checkbox" name="support[]" value="T">
+                                    <input type="checkbox" name="support[]" value="T" {{ old('support') == 'T' ? 'checked' : '' }}>
                                     <span></span>Yang lain:
                                 </label>
-                                <input type="text" class="form-control" name="support_sendiri" placeholder="Jawaban anda">
+                                <input type="text" class="form-control" name="support_sendiri" placeholder="Jawaban anda" value="{{ old('support_sendiri') }}">
                             </div>
                         </div>
                     </div>
@@ -285,19 +287,24 @@
     $("#kelasSelect2").select2().on('change', function() {
         var kelas = $('#kelasSelect2');
         $.ajax({
-                url:"../api/alumni/" + kelas.val(),
-                type:'GET',
-                success:function(data) {
+            url:"../api/alumni/" + kelas.val(),
+            type:'GET',
+            success:function(data) {
                     var alumni = $("#namaSelect2");
                     alumni.empty();
                     alumni.append($("<option></option>").attr("value", '').text('Pilih Nama'));
                     $.each(data, function(value, key) {
-                        alumni.append($("<option></option>").attr("value", value).text(value));
+                        alumni.append($("<option></option>").attr("value", value.trim()).text(value.trim()));
                     }); 
                     alumni.select2();
+                    var oldAlumni = "{{ old('nama') ? old('nama') : ''}} ";
+                    if(oldAlumni){
+                        console.log("{{ old('nama') }}");
+                        alumni.val("{{ rtrim(old('nama')) }}").trigger('change');
+                    }
                 }
             });
-    }).trigger('change');
+        }).trigger('change');
 
     $("#provinceSelect2").select2().on('change', function() {
         var province = $('#provinceSelect2');
@@ -316,16 +323,25 @@
                     village.append($("<option></option>").attr("value", '').text('Pilih Desa'));
                     $.each(data, function(value, key) {
                         regency.append($("<option></option>").attr("value", key).text(value));
-                    }); 
+                    });
                     regency.select2();
+                    var oldRegency = "{{ old('regency_id') ? old('regency_id') : '' }}";
+                    if(oldRegency){
+                        $("#regencySelect2").val("{{ old('regency_id') }}").trigger('change');
+                    }
                 }
             });
     }).trigger('change');
 
     $("#regencySelect2").select2().on('change', function() {
-        var regency = $('#regencySelect2');
+        var oldRegency2 = "{{ old('regency_id') ? old('regency_id') : ''}} ";
+        if(oldRegency2 > 0){
+            var regency = "{{ old('regency_id') }}";
+        }else{
+            var regency = $("#regencySelect2").val();    
+        }
         $.ajax({
-                url:"../api/district/" + regency.val(),
+                url:"../api/district/" + regency,
                 type:'GET',
                 success:function(data) {
                     var district = $("#districtSelect2");
@@ -338,14 +354,23 @@
                         district.append($("<option></option>").attr("value", key).text(value));
                     }); 
                     district.select2();
+                    var oldDistrict = "{{ old('district_id') ? old('district_id') : '' }}";
+                    if(oldDistrict){
+                        $("#districtSelect2").val("{{ old('district_id') }}").trigger('change');
+                    }
                 }
             });
     }).trigger('change');
 
     $("#districtSelect2").select2().on('change', function() {
-        var district = $('#districtSelect2');
+        var oldDistrict2 = "{{ old('district_id') ? old('district_id') : ''}} ";
+        if(oldDistrict2 > 0){
+            var district = "{{ old('district_id') }}";
+        }else{
+            var district = $("#districtSelect2").val();    
+        }
         $.ajax({
-                url:"../api/village/" + district.val(),
+                url:"../api/village/" + district,
                 type:'GET',
                 success:function(data) {
                     var village = $("#villageSelect2");
@@ -355,6 +380,10 @@
                         village.append($("<option></option>").attr("value", key).text(value));
                     }); 
                     village.select2();
+                    var oldVillage = "{{ old('village_id') ? old('village_id') : '' }}";
+                    if(oldVillage){
+                        $("#villageSelect2").val("{{ old('village_id') }}").trigger('change');
+                    }
                 }
             });
     }).trigger('change');

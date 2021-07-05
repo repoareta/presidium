@@ -15,9 +15,15 @@
 									<h3 class="m-auto">Presidium</h3>
 								</div>					
 								<div class="topbar-item">
-									<a href="{{ route('admin.login') }}" class="btn btn-success">
-										Login
-									</a>
+									@if (Auth::check())
+										<a href="{{ route('admin.dashboard') }}" class="btn btn-success">
+											Admin
+										</a>									
+									@else
+										<a href="{{ route('admin.login') }}" class="btn btn-success">
+											Login
+										</a>
+									@endif
 								</div>					
 							</div>
 

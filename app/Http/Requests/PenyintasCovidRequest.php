@@ -11,6 +11,7 @@ class PenyintasCovidRequest extends FormRequest
      *
      * @return bool
      */
+    
     public function authorize()
     {
         return true;
@@ -28,9 +29,15 @@ class PenyintasCovidRequest extends FormRequest
             'kelas_id' => 'required',
             'jenkel' => 'required',
             'province_id' => 'required',
-            'district_id' => 'required',
             'regency_id' => 'required',
-            'village_id' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'province_id.required' => 'Provinsi wajib diisi',
+            'regency_id.required' => 'Kabupaten wajib diisi',
         ];
     }
 }

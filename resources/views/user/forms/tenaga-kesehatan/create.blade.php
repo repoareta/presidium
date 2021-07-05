@@ -72,7 +72,7 @@
                             <select class="kt-select2 form-control" name="kelas_id" id="kelasSelect2">
                                 <option value="">Pilih Kelas</option>
                                 @foreach ($kelas as $kls)
-                                    <option value="{{ $kls->id }}">{{ $kls->nama }}</option>
+                                    <option value="{{ $kls->id }}" {{ old('kelas_id') == $kls->id ? 'selected' : '' }}>{{ $kls->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -102,22 +102,22 @@
                             <label class="font-size-h4">Profesi <span class="text-danger font-size-sm">*</span></label>
                             <div class="radio-list mt-3">
                                 <label class="radio">
-                                    <input type="radio" name="profesi" value="Dokter Umum">
+                                    <input type="radio" name="profesi" value="Dokter Umum" {{ old('profesi') == 'Dokter Umum' ? 'checked' : '' }}>
                                     <span></span>Dokter Umum
                                 </label>
                                 <label class="radio">
-                                    <input type="radio" name="profesi" value="Dokter Spesialis">
+                                    <input type="radio" name="profesi" value="Dokter Spesialis" {{ old('profesi') == 'Dokter Spesialis' ? 'checked' : '' }}>
                                     <span></span>Dokter Spesialis
                                 </label>                                
                                 <label class="radio">
-                                    <input type="radio" name="profesi" value="Psikolog">
+                                    <input type="radio" name="profesi" value="Psikolog" {{ old('profesi') == 'Psikolog' ? 'checked' : '' }}>
                                     <span></span>Psikolog
                                 </label>                                
                                 <label class="radio">
-                                    <input type="radio" name="profesi" value="T">
+                                    <input type="radio" name="profesi" value="T" {{ old('profesi') == 'T' ? 'checked' : '' }}>
                                     <span></span>Yang Lain
                                 </label>
-                                <input type="text" class="form-control" name="profesi_sendiri" placeholder="Jawaban anda">                            
+                                <input type="text" class="form-control" name="profesi_sendiri" placeholder="Jawaban anda" value="{{ old('profesi_sendiri') }}">                            
                             </div>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label class="font-size-h4">Keterangan Profesi</label>
-                            <input type="text" class="form-control mt-3" name="ket_profesi" placeholder="Jawaban anda">
+                            <input type="text" class="form-control mt-3" name="ket_profesi" placeholder="Jawaban anda" value="{{ old('ket_profesi') }}">
                         </div>
                     </div>
                     <!--end::Body-->
@@ -145,7 +145,7 @@
                             <select class="kt-select2 form-control" name="province_id" id="provinceSelect2">
                                 <option value="">Pilih Provinsi</option>
                                 @foreach ($provinces as $province)
-                                    <option value="{{ $province->id }}">{{ $province->name }}</option>
+                                    <option value="{{ $province->id }}" {{ old('province_id') == $province->id ? 'selected' : '' }}>{{ $province->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -172,7 +172,7 @@
                     <!--begin::Body-->
                     <div class="card-body">
                         <div class="form-group">
-                            <label class="font-size-h4">Tempat Bekerja - Kecamatan <span class="text-danger font-size-sm">*</span></label>
+                            <label class="font-size-h4">Tempat Bekerja - Kecamatan</label>
                             <select class="kt-select2 form-control" name="district_id" id="districtSelect2">
                                 <option value="">Pilih Kabupaten</option>
                             </select>
@@ -186,7 +186,7 @@
                     <!--begin::Body-->
                     <div class="card-body">
                         <div class="form-group">
-                            <label class="font-size-h4">Tempat Bekerja - Desa <span class="text-danger font-size-sm">*</span></label>
+                            <label class="font-size-h4">Tempat Bekerja - Desa</label>
                             <select class="kt-select2 form-control" name="village_id" id="villageSelect2">
                                 <option value="">Pilih Desa</option>
                             </select>
@@ -201,7 +201,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label class="font-size-h4">Tempat Bekerja - Nama Instansi <span class="text-danger font-size-sm">*</span></label>
-                            <input type="text" class="form-control mt-3" name="instansi" placeholder="Jawaban anda">
+                            <input type="text" class="form-control mt-3" name="instansi" placeholder="Jawaban anda" value="{{ old('instansi') }}">
                         </div>
                     </div>
                     <!--end::Body-->
@@ -226,19 +226,24 @@
     $("#kelasSelect2").select2().on('change', function() {
         var kelas = $('#kelasSelect2');
         $.ajax({
-                url:"../api/alumni/" + kelas.val(),
-                type:'GET',
-                success:function(data) {
+            url:"../api/alumni/" + kelas.val(),
+            type:'GET',
+            success:function(data) {
                     var alumni = $("#namaSelect2");
                     alumni.empty();
                     alumni.append($("<option></option>").attr("value", '').text('Pilih Nama'));
                     $.each(data, function(value, key) {
-                        alumni.append($("<option></option>").attr("value", value).text(value));
+                        alumni.append($("<option></option>").attr("value", value.trim()).text(value.trim()));
                     }); 
                     alumni.select2();
+                    var oldAlumni = "{{ old('nama') ? old('nama') : ''}} ";
+                    if(oldAlumni){
+                        console.log("{{ old('nama') }}");
+                        alumni.val("{{ rtrim(old('nama')) }}").trigger('change');
+                    }
                 }
             });
-    }).trigger('change');
+        }).trigger('change');
 
     $("#provinceSelect2").select2().on('change', function() {
         var province = $('#provinceSelect2');
@@ -257,16 +262,25 @@
                     village.append($("<option></option>").attr("value", '').text('Pilih Desa'));
                     $.each(data, function(value, key) {
                         regency.append($("<option></option>").attr("value", key).text(value));
-                    }); 
+                    });
                     regency.select2();
+                    var oldRegency = "{{ old('regency_id') ? old('regency_id') : '' }}";
+                    if(oldRegency){
+                        $("#regencySelect2").val("{{ old('regency_id') }}").trigger('change');
+                    }
                 }
             });
     }).trigger('change');
 
     $("#regencySelect2").select2().on('change', function() {
-        var regency = $('#regencySelect2');
+        var oldRegency2 = "{{ old('regency_id') ? old('regency_id') : ''}} ";
+        if(oldRegency2 > 0){
+            var regency = "{{ old('regency_id') }}";
+        }else{
+            var regency = $("#regencySelect2").val();    
+        }
         $.ajax({
-                url:"../api/district/" + regency.val(),
+                url:"../api/district/" + regency,
                 type:'GET',
                 success:function(data) {
                     var district = $("#districtSelect2");
@@ -279,14 +293,23 @@
                         district.append($("<option></option>").attr("value", key).text(value));
                     }); 
                     district.select2();
+                    var oldDistrict = "{{ old('district_id') ? old('district_id') : '' }}";
+                    if(oldDistrict){
+                        $("#districtSelect2").val("{{ old('district_id') }}").trigger('change');
+                    }
                 }
             });
     }).trigger('change');
 
     $("#districtSelect2").select2().on('change', function() {
-        var district = $('#districtSelect2');
+        var oldDistrict2 = "{{ old('district_id') ? old('district_id') : ''}} ";
+        if(oldDistrict2 > 0){
+            var district = "{{ old('district_id') }}";
+        }else{
+            var district = $("#districtSelect2").val();    
+        }
         $.ajax({
-                url:"../api/village/" + district.val(),
+                url:"../api/village/" + district,
                 type:'GET',
                 success:function(data) {
                     var village = $("#villageSelect2");
@@ -296,6 +319,10 @@
                         village.append($("<option></option>").attr("value", key).text(value));
                     }); 
                     village.select2();
+                    var oldVillage = "{{ old('village_id') ? old('village_id') : '' }}";
+                    if(oldVillage){
+                        $("#villageSelect2").val("{{ old('village_id') }}").trigger('change');
+                    }
                 }
             });
     }).trigger('change');

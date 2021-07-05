@@ -26,13 +26,13 @@ class PasienCovidRequest extends FormRequest
         return [
             'nama' => 'required',
             'kelas_id' => 'required',
-            'village_id' => 'required',
+            'province_id' => 'required',
             'regency_id' => 'required',
-            'district_id' => 'required',
-            'village_id' => 'required',
             'jenkel' => 'required',
             'kondisi' => 'required',
             'support' => 'required',
+            'kondisi_sendiri' => 'required_if:kondisi,T',
+            'support_sendiri' => 'required_if:support,T',
         ];
     }
 
@@ -41,4 +41,13 @@ class PasienCovidRequest extends FormRequest
      *
      * @return array
      */
+    public function messages()
+    {
+        return [
+            'kondisi_sendiri.required_if' => 'Kondisi jawaban anda wajib diisi',
+            'support_sendiri.required_if' => 'Support jawaban anda wajib diisi',
+            'province_id.required' => 'Provinsi wajib diisi',
+            'regency_id.required' => 'Kabupaten wajib diisi',
+        ];
+    }
 }
