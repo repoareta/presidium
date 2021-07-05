@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 // use Model
 use App\Models\PasienCovid;
+use App\Models\PenyintasCovid;
 
 // use Export 
 use App\Exports\PasienCovidExport;
@@ -16,6 +17,7 @@ use App\Exports\PasienCovidExport;
 // use Plugin
 use Yajra\DataTables\Facades\DataTables;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class PasienCovidController extends Controller
 {
@@ -67,6 +69,12 @@ class PasienCovidController extends Controller
                 ->addColumn('support', function($data){
                     return $data->support;
                 })
+                ->addColumn('action', function($data){
+                    return '
+                        <button class="btn btn-success btn-shadow-hover" data-id="'.$data->id.'" id="toPenyintas">Menjadi Penyintas</button>
+                    ';
+                })
+                ->rawColumns(['action'])
                 ->make();
         }
 
@@ -142,5 +150,28 @@ class PasienCovidController extends Controller
     public function exportExcel()
     {
         return Excel::download(new PasienCovidExport, 'pasien-covid.xlsx');
+    }
+
+    public function toPenyintas(Request $request)
+    {
+        $pasien = PasienCovid::find($request->id);
+        
+        $penyintas = new PenyintasCovid();
+        $penyintas->nama = $pasien->nama;
+        $penyintas->kelas_id = $pasien->kelas_id;
+        $penyintas->jenkel = $pasien->jenkel;
+        $penyintas->goldar = $pasien->goldar;
+        $penyintas->rhesus = $pasien->rhesus;
+        $penyintas->sembuh = Carbon::now();
+        $penyintas->province_id = $pasien->province_id;
+        $penyintas->village_id = $pasien->village_id;
+        $penyintas->regency_id = $pasien->regency_id;
+        $penyintas->district_id = $pasien->district_id;
+        $penyintas->donor_plasma = false;
+        $penyintas->save();
+
+        $pasien->delete();
+        
+        return response()->json(['success' => true]);
     }
 }

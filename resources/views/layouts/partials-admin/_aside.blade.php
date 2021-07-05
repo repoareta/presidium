@@ -6,7 +6,7 @@
 					<div class="brand flex-column-auto" id="kt_brand">
 
 						<!--begin::Logo-->
-						<a href="#" class="brand-logo m-auto">
+						<a href="{{ route('admin.dashboard') }}" class="brand-logo m-auto">
 							<img alt="Logo" height="50px" src="{{ asset('images/ti94.jpg') }}" />
 						</a>
 

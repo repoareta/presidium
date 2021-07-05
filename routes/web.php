@@ -99,6 +99,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
                 // Pasien Covid
                 Route::get('/pasien-covid', [AdminPasienCovidController::class, 'index'])->name('pasien_covid.');
+                Route::post('/pasien-covid/penyintas', [AdminPasienCovidController::class, 'toPenyintas'])->name('pasien_covid.penyintas');
                 Route::get('/pasien-covid/export-excel', [AdminPasienCovidController::class, 'exportExcel'])->name('pasien_covid.excel');
                 // Penyintas Covid
                 Route::get('/penyintas-covid', [AdminPenyintasCovidController::class, 'index'])->name('penyintas_covid.');

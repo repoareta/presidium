@@ -51,6 +51,7 @@
                             <th scope="col">Desa</th>
                             <th scope="col">Kondisi</th>
                             <th scope="col">Support</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -98,7 +99,46 @@
 				{data: 'village', name: 'village'},
 				{data: 'kondisi', name: 'kondisi'},
 				{data: 'support', name: 'support'},
+				{data: 'action', name: 'action'},
 			]
+		});
+
+        $('#dataTable tbody').on( 'click', '#toPenyintas', function (e) {
+			e.preventDefault();
+			var id = $(this).attr('data-id');
+			Swal.fire({
+				title: "Apakah anda yakin?",
+				text: "Data yang anda pilih akan menjadi penyintas!" ,
+				icon: "warning",
+				confirmButtonText: "Iya",
+				cancelButtonText: "Tidak",
+				showCancelButton: true,
+			}).then(function(result) {
+				if (result.value) {
+					$.ajax({
+						url: "{{ route('admin.report.formulir.pasien_covid.penyintas') }}",
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							"id": id,
+							"_token": "{{ csrf_token() }}",
+						},
+						success: function () {
+							Swal.fire({
+								title: "Sukses",
+								text: "Data berhasil menjadi Penyintas",
+								icon: "success",
+								confirmButtonText: "Iya",
+							}).then(function() {
+								location.reload();
+							});
+						},
+						error: function () {
+							alert("An error occurred, please try again later.");
+						}
+					});
+				}
+			});
 		});
     } );
 </script>

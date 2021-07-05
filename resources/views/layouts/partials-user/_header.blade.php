@@ -9,7 +9,7 @@
 							<!--begin::Topbar-->
 							<div class="topbar justify-content-between w-100">
 								<div class="topbar-item">
-									<a href="#" class="brand-logo m-auto">
+									<a href="{{ route('home') }}" class="brand-logo m-auto">
 										<img alt="Logo" height="50px" src="{{ asset('images/ti94.jpg') }}" />
 									</a>
 									<h3 class="m-auto">Presidium</h3>
