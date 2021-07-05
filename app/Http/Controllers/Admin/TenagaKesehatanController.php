@@ -49,10 +49,14 @@ class TenagaKesehatanController extends Controller
                     return $data->regency->name;
                 })
                 ->addColumn('district', function($data){
-                    return $data->district->name;
+                    if($data->district){
+                        return $data->district->name;
+                    }
                 })
                 ->addColumn('village', function($data){
-                    return $data->village->name;
+                    if($data->village){
+                        return $data->village->name;
+                    }
                 })
                 ->addColumn('instansi', function($data){
                     return $data->instansi;
