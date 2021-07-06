@@ -90,6 +90,9 @@
                                 <option value="">Pilih Nama</option>
                             </select>
                         </div>
+                        <span class="text-primary text-justify font-weight-bold">
+                            Jika nama tidak ada dalam list, maka anda bisa mengetikkan nama anda lalu klik enter, maka nama anda akan ada dalam list.
+                        </span>
                     </div>
                     <!--end::Body-->
                 </div>
