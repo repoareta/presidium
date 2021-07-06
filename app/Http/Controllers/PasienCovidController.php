@@ -57,6 +57,7 @@ class PasienCovidController extends Controller
         $Query->regency_id = $request->regency_id;
         $Query->district_id = $request->district_id;
         $Query->village_id = $request->village_id;
+        $Query->emergency_number = '0'.$request->emergency_number;
 
         if($request->kondisi == 'T'){
             if(!$request->kondisi_sendiri){

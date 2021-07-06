@@ -51,6 +51,7 @@
                             <th scope="col">Desa</th>
                             <th scope="col">Kondisi</th>
                             <th scope="col">Support</th>
+                            <th scope="col">Emergency Number</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -100,6 +101,11 @@
                                     <span></span>Tidak
                                 </label>                                
                             </div>
+                            @error('donor_plasma')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>                                
+                            @enderror
                         </div>
                     </form>
                 </div>
@@ -150,6 +156,7 @@
 				{data: 'village', name: 'village'},
 				{data: 'kondisi', name: 'kondisi'},
 				{data: 'support', name: 'support'},
+				{data: 'emergency_number', name: 'emergency_number'},
 				{data: 'action', name: 'action'},
 			]
 		});

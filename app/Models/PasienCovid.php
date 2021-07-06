@@ -22,6 +22,7 @@ class PasienCovid extends Model
         'kota',
         'kondisi',
         'support',
+        'emergency_number',
     ];
 
     protected $table = 'pasien_covid';

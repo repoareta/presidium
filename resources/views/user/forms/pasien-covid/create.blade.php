@@ -146,6 +146,23 @@
                     <!--begin::Body-->
                     <div class="card-body">
                         <div class="form-group">
+                            <label class="font-size-h4">Emergency Number</label>
+                            <div class="input-icon">
+                                <span>
+                                    (62)
+                                </span>
+                                <input type="text" class="form-control mt-3 phone_with_ddd" name="emergency_number" placeholder="Jawaban anda" value="{{ old('emergency_number') }}">
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Card-->
+                <!--begin::Card-->
+                <div class="card card-custom gutter-b">
+                    <!--begin::Body-->
+                    <div class="card-body">
+                        <div class="form-group">
                             <label class="font-size-h4">Provinsi <span class="text-danger font-size-sm">*</span></label>
                             <select class="kt-select2 form-control" name="province_id" id="provinceSelect2">
                                 <option value="">Pilih Provinsi</option>
@@ -286,6 +303,8 @@
         $("#namaSelect2").select2({
             tags: true
         });
+
+        $('.phone_with_ddd').mask('000-0000-0000-00');
     });
 
     $("#kelasSelect2").select2().on('change', function() {
@@ -306,6 +325,9 @@
                         console.log("{{ old('nama') }}");
                         alumni.val("{{ rtrim(old('nama')) }}").trigger('change');
                     }
+                    $("#namaSelect2").select2({
+                        tags: true
+                    });
                 }
             });
         }).trigger('change');
