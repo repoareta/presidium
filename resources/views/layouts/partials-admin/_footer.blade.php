@@ -9,7 +9,7 @@
 							<div class="text-dark order-2 order-md-1">
 								<span class="text-muted font-weight-bold mr-2" id="yearFooter">2021</span>©
 								<a href="#" class="text-dark-75">Presidium ti94 | Powered By
-									<a href="https://aretaamany.com" class="text-primary">Areta Amany</a>
+									<a href="https://aretaamany.com" target="_blank" class="text-primary">Areta Amany Solusi</a>
 								</a>
 							</div>
 
