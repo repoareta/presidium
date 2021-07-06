@@ -4,7 +4,7 @@
 
 			<!--begin::Logo-->
 			<a href="{{ route('admin.dashboard') }}">
-				<img alt="Logo" height="50px" src="{{ asset('images/ti94.jpg') }}" />
+				<img alt="Logo" height="50px" src="{{ asset('images/logo.png') }}" />
 			</a>
 
 			<!--end::Logo-->
