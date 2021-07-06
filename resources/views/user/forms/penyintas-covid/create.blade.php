@@ -291,6 +291,10 @@
                         console.log("{{ old('nama') }}");
                         alumni.val("{{ rtrim(old('nama')) }}").trigger('change');
                     }
+
+                    $("#namaSelect2").select2({
+                        tags: true
+                    });
                 }
             });
         }).trigger('change');
