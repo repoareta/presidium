@@ -17,8 +17,9 @@ use App\Exports\PasienCovidExport;
 // use Plugin
 use Yajra\DataTables\Facades\DataTables;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
-
 class PasienCovidController extends Controller
 {
     /**
@@ -155,19 +156,29 @@ class PasienCovidController extends Controller
     public function toPenyintas(Request $request)
     {
         $pasien = PasienCovid::find($request->id);
-        
+
+        $validator = Validator::make($request->all(), [
+            'sembuh' => 'required|date',
+            'donor_plasma' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Alert::error('Error', 'Isi semua input')->persistent(true)->autoClose(4000);
+            return redirect()->back();
+        }
+
         $penyintas = new PenyintasCovid();
         $penyintas->nama = $pasien->nama;
         $penyintas->kelas_id = $pasien->kelas_id;
         $penyintas->jenkel = $pasien->jenkel;
         $penyintas->goldar = $pasien->goldar;
         $penyintas->rhesus = $pasien->rhesus;
-        $penyintas->sembuh = Carbon::now();
+        $penyintas->sembuh = Carbon::parse($request->sembuh)->format('Y-m-d');
         $penyintas->province_id = $pasien->province_id;
         $penyintas->village_id = $pasien->village_id;
         $penyintas->regency_id = $pasien->regency_id;
         $penyintas->district_id = $pasien->district_id;
-        $penyintas->donor_plasma = false;
+        $penyintas->donor_plasma = $request->donor_plasma == 'T' ? true : false;
         $penyintas->save();
 
         $pasien->delete();

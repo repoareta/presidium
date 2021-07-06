@@ -61,6 +61,57 @@
         </div>
     </div>
     <!--end::Card-->
+    <!--start::Modal Card-->
+
+    <!-- Modal-->
+    <div class="modal fade" id="penyintasModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Menjadi Penyintas Covid</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('admin.report.formulir.pasien_covid.penyintas') }}" method="post" id="formPenyintas">
+                        @csrf
+                        <input type="hidden" name="id">
+                        <div class="form-group">
+                            <label class="font-size-h4">Tanggal Dinyatakan Sembuh</label>
+                            <div class="input-group date mt-3">
+                                <input type="text" id="tanggalSembuh" class="form-control" name="sembuh" readonly="readonly" placeholder="Pilih Tanggal" value="{{ old('sembuh') }}">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="la la-calendar-check-o"></i>
+                                    </span>
+                                </div>
+                            </div>                           
+                        </div>
+                        <div class="form-group">
+                            <label class="font-size-h4">Bisa Donor Plasma</label>
+                            <div class="radio-list mt-3">
+                                <label class="radio">
+                                    <input type="radio" name="donor_plasma" value="T" {{ old('donor_plasma') == 'T' ? 'checked' : '' }}>
+                                    <span></span>Ya
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="donor_plasma" value="F" {{ old('donor_plasma') == 'F' ? 'checked' : '' }}>
+                                    <span></span>Tidak
+                                </label>                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                    <button type="submit" form="formPenyintas" class="btn btn-primary font-weight-bold">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end::Modal Card-->
+
 </div>
 @endsection
 
@@ -103,43 +154,55 @@
 			]
 		});
 
+        $('#tanggalSembuh').datepicker({
+            format: 'dd-mm-yyyy',
+            orientation: "left bottom",
+            locale: 'id',
+            language: 'id',
+            maxDate: '0',
+            date: new Date(),
+            endDate: new Date()
+        });
+
         $('#dataTable tbody').on( 'click', '#toPenyintas', function (e) {
 			e.preventDefault();
 			var id = $(this).attr('data-id');
-			Swal.fire({
-				title: "Apakah anda yakin?",
-				text: "Data yang anda pilih akan menjadi penyintas!" ,
-				icon: "warning",
-				confirmButtonText: "Iya",
-				cancelButtonText: "Tidak",
-				showCancelButton: true,
-			}).then(function(result) {
-				if (result.value) {
-					$.ajax({
-						url: "{{ route('admin.report.formulir.pasien_covid.penyintas') }}",
-						type: 'POST',
-						dataType: 'json',
-						data: {
-							"id": id,
-							"_token": "{{ csrf_token() }}",
-						},
-						success: function () {
-							Swal.fire({
-								title: "Sukses",
-								text: "Data berhasil menjadi Penyintas",
-								icon: "success",
-								confirmButtonText: "Iya",
-							}).then(function() {
-								location.reload();
-							});
-						},
-						error: function () {
-							alert("An error occurred, please try again later.");
-						}
-					});
-				}
-			});
+            $('#penyintasModal').modal('show'); 
+            $('input[name=id]').val(id);
 		});
+        // Swal.fire({
+        //     title: "Apakah anda yakin?",
+        //     text: "Data yang anda pilih akan menjadi penyintas!" ,
+        //     icon: "warning",
+        //     confirmButtonText: "Iya",
+        //     cancelButtonText: "Tidak",
+        //     showCancelButton: true,
+        // }).then(function(result) {
+        //     if (result.value) {
+        //         $.ajax({
+        //             url: "{{ route('admin.report.formulir.pasien_covid.penyintas') }}",
+        //             type: 'POST',
+        //             dataType: 'json',
+        //             data: {
+        //                 "id": id,
+        //                 "_token": "{{ csrf_token() }}",
+        //             },
+        //             success: function () {
+        //                 Swal.fire({
+        //                     title: "Sukses",
+        //                     text: "Data berhasil menjadi Penyintas",
+        //                     icon: "success",
+        //                     confirmButtonText: "Iya",
+        //                 }).then(function() {
+        //                     location.reload();
+        //                 });
+        //             },
+        //             error: function () {
+        //                 alert("An error occurred, please try again later.");
+        //             }
+        //         });
+        //     }
+        // });
     } );
 </script>
 @endpush

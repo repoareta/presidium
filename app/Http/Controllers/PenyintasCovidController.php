@@ -59,7 +59,7 @@ class PenyintasCovidController extends Controller
         $Query->village_id = $request->village_id;
         $Query->regency_id = $request->regency_id;
         $Query->district_id = $request->district_id;
-        $Query->donor_plasma = $request->donor_plasma == 'T' ? true : false ;
+        $Query->donor_plasma = $request->donor_plasma == 'T' ? true : false;
         $Query->save();
 
         Alert::success('Berhasil', 'Data anda berhasil disimpan')->persistent(true)->autoClose(3000);

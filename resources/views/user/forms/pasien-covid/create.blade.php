@@ -282,6 +282,10 @@
 <script>
     $(document).ready(function () {
         $('.kt-select2').select2();
+
+        $("#namaSelect2").select2({
+            tags: true
+        });
     });
 
     $("#kelasSelect2").select2().on('change', function() {
