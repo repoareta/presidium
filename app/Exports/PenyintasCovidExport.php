@@ -46,8 +46,8 @@ class PenyintasCovidExport implements FromCollection, WithHeadings
             $data->kelas_id = $data->kelas->nama;
             $data->province_id = $data->province->name;
             $data->regency_id = $data->regency->name;
-            $data->district_id = $data->district->name;
-            $data->village_id = $data->village->name;
+            $data->district_id = $data->district ? $data->district->name : '';
+            $data->village_id = $data->village ? $data->village->name : '';
         }
 
         return $datas;
