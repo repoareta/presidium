@@ -60,7 +60,8 @@ class PasienCovidExport implements FromCollection, WithHeadings
             'Kecamatan',
             'Desa',
             'Kondisi Saat Ini',
-            'Support yang Diperlukan Saat Ini'
+            'Support yang Diperlukan Saat Ini',
+            'Emergency Number'
         ];
     }
 }
