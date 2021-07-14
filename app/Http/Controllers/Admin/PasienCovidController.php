@@ -183,6 +183,7 @@ class PasienCovidController extends Controller
 
         $pasien->delete();
         
-        return response()->json(['success' => true]);
+        Alert::success('Success', 'Data sudah menjadi penyintas')->persistent(true)->autoClose(4000);
+        return redirect()->back();
     }
 }
